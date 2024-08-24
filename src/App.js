@@ -3,6 +3,7 @@ import logo from './Assets/img/applelogo.svg';
 import heroiphone1 from './Assets/img/heroiphone1.svg';
 import IphoneFrame from './Assets/img/IphoneFrame.svg';
 import Datatransfer from './Assets/img/Datatransfer.svg';
+import iphoneblackfm from './Assets/img/iphoneframeblackbg.svg';
 import A17pro from './Assets/img/A17pro.svg';
 import play from './Assets/img/play.svg';
 import onMic from './Assets/img/onMic.svg';
@@ -393,11 +394,11 @@ function App() {
       </div>
 
       <div className='flex relative justify-between items-center h-[200vh]'>
-      <div className="absolute z-[1] w-full h-full flex justify-center bg-[#0000006c] items-center">
+      <div className="absolute z-[1] w-full h-full flex justify-center bg-[#00000052] items-center">
         <img
           ref={imageRef}
           className='z-[1]'
-          src={IphoneFrame}
+          src={iphoneblackfm}
           alt="IphoneFrame"
           style={{
             transform: 'rotate(90deg) scale(0.4)',
