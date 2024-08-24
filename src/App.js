@@ -1,13 +1,19 @@
+import React, { useState, useEffect, useRef } from 'react';
 import logo from './Assets/img/applelogo.svg';
 import heroiphone1 from './Assets/img/heroiphone1.svg';
 import IphoneFrame from './Assets/img/IphoneFrame.svg';
+import Datatransfer from './Assets/img/Datatransfer.svg';
+import A17pro from './Assets/img/A17pro.svg';
+import play from './Assets/img/play.svg';
 import onMic from './Assets/img/onMic.svg';
 import ofMic from './Assets/img/ofMic.svg';
 import assistant from './Assets/img/assistant.svg';
 import sirivideo from './Assets/video/Sequence2.mp4';
+import quickbuttonad from './Assets/video/button_feature_ad.mp4';
+import videoscrollad from './Assets/video/scrollingvideo_ad.mp4';
+import iphonevarient from './Assets/video/iphone_color.mp4';
 import HeroAds from './Assets/video/herovideo.mp4';
 import './App.css';
-import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -34,12 +40,7 @@ function App() {
         setScale(newScale);
 
         // Move the video downward
-        // const newTranslateY = Math.min(1500, scrollPosition / .7);
-        // setTranslateY(newTranslateY);
-
         const divisor = 1.3 - (scrollPosition / 850) * (1.5 - 0.7);
-
-        // Move the video downward
         const newTranslateY = Math.min(1200, scrollPosition / divisor);
         setTranslateY(newTranslateY);
 
@@ -64,7 +65,7 @@ function App() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, 
+      duration: 1000,
       once: false,
       easing: 'ease-in-out',
     });
@@ -95,6 +96,57 @@ function App() {
     minute: 'numeric',
     hour12: true, // Use 12-hour format
   }).replace(/AM|PM/, '');
+
+  const scrollerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollBy({ left: -1200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollerRef.current) {
+      scrollerRef.current.scrollBy({ left: 1200, behavior: 'smooth' });
+    }
+  };
+
+
+  const videoRef = useRef(null);
+  const imageRef = useRef(null);
+  const [zoomedIn, setZoomedIn] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const image = imageRef.current;
+      const video = videoRef.current;
+      const rect = video.getBoundingClientRect();
+      
+      // Adjusted the zoom start point to be more downward
+      const startZoomOffset = window.innerHeight * 0.5; // 30% of the screen height from the top
+      const offset = window.innerHeight / 2 - rect.top;
+
+      if (offset > startZoomOffset && !zoomedIn) {
+        // Increase the scale factor for a more pronounced zoom
+        const scale = Math.min(0.4 + (offset - startZoomOffset) / (window.innerHeight * 0.8), 2.5);
+        image.style.transform = `rotate(90deg) scale(${scale})`;
+
+        // Ensure the video is in the viewport as the zoom finishes
+        video.style.transform = `translateY(${Math.min(offset - startZoomOffset, window.innerHeight - rect.height)}px)`;
+
+        if (scale >= 2.5) {
+          setZoomedIn(true);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [zoomedIn]);
+
 
   return (
     <div>
@@ -249,6 +301,123 @@ function App() {
         }
       </div>
 
+      <div className=' py-52'>
+        <div className='w-[68%] mb-[3rem] m-auto'>
+          <div className='flex items-center justify-between '>
+            <h1 className='font-bold text-5xl text-[#8F8F8F]' >Get the highlights.</h1>
+            <p className='flex gap-3 text-[17px] font-light text-[#247BCE]'>Experience Cinematic Film.<img className=' w-5' src={play} alt='play' /></p>
+          </div>
+        </div>
+        <div className="relative flex items-center justify-center w-full mx-auto">
+          <button
+            className="absolute left-0 h-[70vh] w-[6.5vw] z-10 p-2  "
+            onClick={scrollLeft}
+          >
+
+          </button>
+          <div
+            className="flex space-x-36 overflow-x-auto scrollbar-hide"
+            ref={scrollerRef}
+          >
+            <div className="flex-none relative w-[1050px] ml-56 h-auto rounded-[32px] border border-white border-opacity-30 overflow-hidden shadow-lg">
+              <h2 className="absolute top-6 font-bold text-2xl z-[2] left-[1.6rem] text-white ">A17 Pro: Power Redefined.</h2>
+              <img className="w-full h-auto" a src={A17pro} alt='A17pro' />
+            </div>
+            <div className="flex-none relative w-[1050px] h-auto  rounded-[32px] border border-white border-opacity-30 overflow-hidden shadow-lg">
+              <h2 className="absolute top-6 font-bold text-2xl z-[2] left-[1.6rem] text-white ">Discover the Spectrum of Elegance.</h2>
+              <video src={iphonevarient} autoPlay loop muted className="w-full rounded-[32px] h-auto" />
+            </div>
+            <div className="flex-none relative w-[1050px] mr-56 h-auto  rounded-[32px] border border-white border-opacity-30 overflow-hidden shadow-lg"
+              style={{ marginRight: '224px' }}
+            >
+              <h2 className="absolute top-6 font-bold text-2xl z-[2] left-[1.6rem] text-white ">All-new Action button.<br />What will yours do?</h2>
+              <video src={quickbuttonad} autoPlay loop muted className="w-full rounded-[32px] h-auto" />
+            </div>
+          </div>
+          <button
+            className="absolute right-0 h-[70vh] w-[6.5vw] z-10 p-2"
+            onClick={scrollRight}
+          >
+
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div className='w-[68%] mb-[0.5rem] m-auto'>
+          <h1 className='font-bold text-5xl text-[#8F8F8F]' >Take Closer Look</h1>
+        </div>
+        <div>
+          <Spline
+            scene="https://prod.spline.design/xkzM4Z1DgihWp4oK/scene.splinecode"
+          />
+        </div>
+
+      </div>
+
+
+      <div className=' flex justify-between w-[90%] items-center'>
+        <img className=' w-[40rem]' src={Datatransfer} alt='transfer' />
+        <div className=' mt-[-130px]'>
+          <h4 className=' text-[#8F8F8F] font-bold text-3xl'>Upto 10mbps</h4>
+          <h1 className=' font-bold text-5xl mt-2 text-white'>seamless Data Transfer</h1>
+          <div className=' flex gap-24 mt-6'>
+            <div className=' space-y-5'>
+              <p className=' text-[#86868B] text-base'>
+                iPhone 15 Pro is the first iPhone to<br />
+                support USB 3,4 for a <span className=' text-white'> huge leap in<br />
+                  data transfer speeds </span> and faster<br />
+                pro workflows than ever before.</p>
+              <p className=' text-[#86868B] font-semibold text-base'>The new USB‑C connector lets<br />
+                you<span className=' text-white text-base'> charge your Mac or iPad with<br />
+                  the same cable you use to charge<br />
+                  iPhone 15 Pro.</span> Bye‑bye,<br />
+                cable clutter.</p>
+            </div>
+            <div className=' space-y-5'>
+              <p className=' text-[#86868B] font-semibold text-base' >Up to<br />
+                <span className=' text-white font font-semibold text-4xl'>
+                  20x faster<br />
+                </span>
+                file transfers</p>
+              <p className=' text-[#86868B] font-semibold text-base'>
+                And with all‑new Wi‑Fi 6E you'll<br />
+                get<span className=' text-white'> two times faster wireless<br />
+                  speeds.</span> So you can upload,<br />
+                download, and transfer files<br />
+                in a flash.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='flex relative justify-between items-center h-[200vh]'>
+      <div className="absolute z-[1] w-full h-full flex justify-center bg-[#0000006c] items-center">
+        <img
+          ref={imageRef}
+          className='z-[1]'
+          src={IphoneFrame}
+          alt="IphoneFrame"
+          style={{
+            transform: 'rotate(90deg) scale(0.4)',
+            transition: 'transform 0.5s ease-out',
+          }}
+        />
+      </div>
+      <video
+        ref={videoRef}
+        className="h-screen top-0 w-full"
+        style={{
+          objectFit: 'cover',
+          transition: 'transform 0.5s ease-out', // Smooth transition for video movement
+        }}
+        src={videoscrollad}
+        autoPlay
+        loop
+        muted={isMuted}
+      />
+    </div>
 
     </div>
   );
