@@ -4,6 +4,7 @@ import heroiphone1 from './Assets/img/heroiphone1.svg';
 import IphoneFrame from './Assets/img/IphoneFrame.svg';
 import Datatransfer from './Assets/img/Datatransfer.svg';
 import iphoneblackfm from './Assets/img/iphoneframeblackbg.svg';
+import sutter from './Assets/img/sutter.svg';
 import A17pro from './Assets/img/A17pro.svg';
 import play from './Assets/img/play.svg';
 import onMic from './Assets/img/onMic.svg';
@@ -12,6 +13,7 @@ import assistant from './Assets/img/assistant.svg';
 import sirivideo from './Assets/video/Sequence2.mp4';
 import quickbuttonad from './Assets/video/button_feature_ad.mp4';
 import videoscrollad from './Assets/video/scrollingvideo_ad.mp4';
+import cameraAd from './Assets/video/cameraAd.mp4';
 import iphonevarient from './Assets/video/iphone_color.mp4';
 import HeroAds from './Assets/video/herovideo.mp4';
 import './App.css';
@@ -19,6 +21,7 @@ import { useInView } from 'react-intersection-observer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Spline from '@splinetool/react-spline';
+import ImageScrubbing from './ImageScrubbing';
 
 function App() {
 
@@ -26,6 +29,7 @@ function App() {
     threshold: 0.5,
   });
   const [isMuted, setIsMuted] = useState(true);
+  const [isMuted2, setIsMuted2] = useState(true);
   const [scale, setScale] = useState(1.5);
   const [translateY, setTranslateY] = useState(0);
   const [opacity, setOpacity] = useState(1);
@@ -55,7 +59,11 @@ function App() {
         } else {
           setShowNextSection(false);
         }
+        // setIsMuted(false);
       }
+      // else{
+      //   setIsMuted(true);
+      // }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -112,32 +120,29 @@ function App() {
     }
   };
 
-
   const videoRef = useRef(null);
   const imageRef = useRef(null);
   const [zoomedIn, setZoomedIn] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
       const image = imageRef.current;
       const video = videoRef.current;
       const rect = video.getBoundingClientRect();
-      
-      // Adjusted the zoom start point to be more downward
-      const startZoomOffset = window.innerHeight * 0.5; // 30% of the screen height from the top
+
+      const startZoomOffset = window.innerHeight * 0.3;
       const offset = window.innerHeight / 2 - rect.top;
 
       if (offset > startZoomOffset && !zoomedIn) {
-        // Increase the scale factor for a more pronounced zoom
-        const scale = Math.min(0.4 + (offset - startZoomOffset) / (window.innerHeight * 0.8), 2.5);
-        image.style.transform = `rotate(90deg) scale(${scale})`;
-
-        // Ensure the video is in the viewport as the zoom finishes
-        video.style.transform = `translateY(${Math.min(offset - startZoomOffset, window.innerHeight - rect.height)}px)`;
-
-        if (scale >= 2.5) {
+        const scale = Math.min(1 + (offset - startZoomOffset) / (window.innerHeight * 0.1), 6);
+        image.style.transform = `scale(${scale})`;
+        if (scale >= 6) {
           setZoomedIn(true);
         }
+      } else if (offset <= startZoomOffset) {
+        setZoomedIn(false);
+        image.style.transform = 'scale(1)';
       }
     };
 
@@ -149,9 +154,10 @@ function App() {
   }, [zoomedIn]);
 
 
+
   return (
     <div>
-      {/* #0A0A0A */}
+
       <nav className='bg-[#151515] w-[100%] z-[100] fixed top-0 opacity-[72%] flex items-center justify-around p-4'>
         <img className='h-5' src={logo} alt='logo' />
         <div className='flex items-center space-x-8'>
@@ -169,19 +175,6 @@ function App() {
         </div>
       </nav>
       {/* hero section */}
-      {/* <div className=' max-w-[90%] m-auto'>
-        <div className='grid grid-cols-3 h-[90vh] items-center justify-items-center '>
-          <h1 className=' text-[7rem] text-white font-bold opacity-50'>Hey</h1>
-          <video
-          className='w-[150%] max-w-[200%]'
-            src={sirivideo}
-            autoPlay
-            loop
-            muted
-          />
-          <h1 className=' w-60 text-[7rem] text-white font-bold opacity-50'>Siri</h1>
-        </div>
-      </div> */}
       <div className="h-[200vh] flex flex-col ">
         {/* Sticky Section */}
         <div className="h-screen sticky top-0 flex items-center justify-center">
@@ -262,18 +255,7 @@ function App() {
         </div>
 
       </div>
-      {/* <div className=' py-52 text-center relative'
-      style={{textAlign:'-webkit-center'}}
-      >
-        <img src={IphoneFrame} alt='IphoneFrame' />
-        <video
-          className="w-[65%]  "
-          src={HeroAds}
-          autoPlay
-          loop
-          muted
-        />
-      </div> */}
+
       <div className="relative py-52" style={{ textAlign: '-webkit-center' }}
         data-aos="fade-up"
         data-aos-anchor-placement="top-center"
@@ -393,32 +375,103 @@ function App() {
         </div>
       </div>
 
-      <div className='flex relative justify-between items-center h-[200vh]'>
-      <div className="absolute z-[1] w-full h-full flex justify-center bg-[#00000052] items-center">
-        <img
-          ref={imageRef}
-          className='z-[1]'
-          src={iphoneblackfm}
-          alt="IphoneFrame"
+      {/* <div className='flex relative justify-between items-center'>
+        <div className="absolute z-[1] w-full h-full flex justify-center bg-[#00000052] items-center">
+          <img
+            className='z-[1]'
+            src={iphoneblackfm}
+            alt="IphoneFrame"
+            style={{
+              transform: 'rotate(0deg) scale(1)',
+              transition: 'transform 0.5s ease-out',
+            }}
+          />
+        </div>
+        <video
+          className="h-screen top-0 w-full"
           style={{
-            transform: 'rotate(90deg) scale(0.4)',
-            transition: 'transform 0.5s ease-out',
+            objectFit: 'cover',
+            transition: 'transform 0.5s ease-out', // Smooth transition for video movement
           }}
+          src={videoscrollad}
+          autoPlay
+          loop
+          muted={isMuted}
         />
+      </div> */}
+
+      {/* <div className='relative flex justify-center items-center h-[300vh] overflow-hidden'> */}
+
+      <div className="h-screen my-52 relative overflow-hidden">
+        <div className="sticky top-0 h-screen w-full">
+          <div className="relative h-screen w-full overflow-hidden">
+            <video
+              ref={videoRef}
+              className="absolute top-0 h-full w-full object-cover"
+              src={videoscrollad}
+              autoPlay
+              loop
+              muted
+            />
+            <div className="absolute flex justify-center items-center w-full h-full">
+              <img
+                ref={imageRef}
+                className="z-[1]"
+                src={iphoneblackfm}
+                alt="IphoneFrame"
+                style={{
+                  transform: 'scale(1)',
+                  transition: 'transform 0.5s ease-out',
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <video
-        ref={videoRef}
-        className="h-screen top-0 w-full"
-        style={{
-          objectFit: 'cover',
-          transition: 'transform 0.5s ease-out', // Smooth transition for video movement
-        }}
-        src={videoscrollad}
-        autoPlay
-        loop
-        muted={isMuted}
-      />
-    </div>
+
+      <div >
+        <div className='w-[68%] m-auto'>
+          <h1 className=' flex gap-4 items-center font-bold text-5xl text-[#fff]'><img src={sutter} alt='camera' />Camera that capture everything</h1>
+          <p className=' w-[57rem] text-[#8F8F8F] font-bold text-3xl'>From dramatic framing flexibility to next-generation portraits, see what you can do with our most powerful iPhone camera system.</p>
+        </div>
+
+        <div className="relative mt-24" style={{ textAlign: '-webkit-center' }}
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-center"
+        >
+          <img
+            className=' z-[1]'
+            src={IphoneFrame}
+            alt="IphoneFrame"
+            style={{ position: 'relative' }}
+          />
+          <video
+            className="absolute top-1/2 left-1/2 rounded-xl"
+            style={{
+              width: '1100px',
+              height: '500px',
+              transform: 'translate(-50%, -50%)',
+              objectFit: 'cover',
+            }}
+            src={cameraAd}
+            autoPlay
+            loop
+            muted={isMuted2}
+          />{
+            isMuted2 ? (<button className="absolute bottom-16  z-[2] right-[15rem] " onClick={() => setIsMuted2(false)}><img src={ofMic} alt='ofMic' /></button>)
+              : (<button className="absolute bottom-16 z-[2] right-[15rem] " onClick={() => setIsMuted2(true)}><img src={onMic} alt='onMic' /></button>)
+          }
+        </div>
+      </div>
+
+      <div className=' mt-[13rem]'>
+        <h1 className=' w-[68%] m-auto flex gap-4 items-center font-bold text-5xl text-[#8F8F8F]'>Parallax Scrolling : Scroll and See iPhone’s True Depth</h1>
+        <div>
+          <ImageScrubbing />
+        </div>
+      </div>
+
+
 
     </div>
   );

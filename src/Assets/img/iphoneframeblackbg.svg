@@ -1,6 +1,6 @@
-<svg width="1920" height="836" viewBox="0 0 1920 836" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M1920 0H0V836H1920V0ZM838 50C809.281 50 786 73.2812 786 102V735C786 763.719 809.281 787 838 787H1082C1110.72 787 1134 763.719 1134 735V102C1134 73.2812 1110.72 50 1082 50H838Z" fill="black" fill-opacity="0.65"/>
-<rect x="1146" y="37" width="762" height="372" transform="rotate(90 1146 37)" fill="url(#pattern0_364_6)"/>
+<svg width="1912" height="922" viewBox="0 0 1912 922" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1920 0H0V922H1920V0ZM838 87.9537C809.281 87.9537 786 111.49 786 140.524V780.465C786 809.498 809.281 833.035 838 833.035H1082C1110.72 833.035 1134 809.498 1134 780.465V140.524C1134 111.49 1110.72 87.9537 1082 87.9537H838Z" fill="black" fill-opacity="0.8"/>
+<rect x="1146" y="75" width="762" height="372" transform="rotate(90 1146 75)" fill="url(#pattern0_364_6)"/>
 <defs>
 <pattern id="pattern0_364_6" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_364_6" transform="matrix(0.000948767 0 0 0.00194344 0 -0.00140785)"/>
