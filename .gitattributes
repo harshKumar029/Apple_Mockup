@@ -1,2 +1,3 @@
 *.largefileextension filter=lfs diff=lfs merge=lfs -text
 src/Assets/video/scrollingvideo_ad.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
