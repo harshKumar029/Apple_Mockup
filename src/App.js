@@ -12,7 +12,7 @@ import ofMic from './Assets/img/ofMic.svg';
 import assistant from './Assets/img/assistant.svg';
 import sirivideo from './Assets/video/Sequence2.mp4';
 import quickbuttonad from './Assets/video/button_feature_ad.mp4';
-import videoscrollad from './Assets/video/scrollingvideo_ad.mp4';
+import videoscrollad from './Assets/video/scrollingvideo_ad1.mp4';
 import cameraAd from './Assets/video/cameraAd.mp4';
 import iphonevarient from './Assets/video/iphone_color.mp4';
 import HeroAds from './Assets/video/herovideo.mp4';
