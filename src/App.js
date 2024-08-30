@@ -196,7 +196,7 @@ function App() {
             >
               <video
                 className="w-[65%] "
-                src='/Assets/video/scrollingvideo_ad1.mp4'
+                src='https://www.w3schools.com/html/mov_bbb.mp4'
                 autoPlay
                 loop
                 muted
