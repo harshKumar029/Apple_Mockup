@@ -196,7 +196,7 @@ function App() {
             >
               <video
                 className="w-[65%] "
-                src={sirivideo}
+                src='/Assets/video/scrollingvideo_ad1.mp4'
                 autoPlay
                 loop
                 muted
@@ -478,3 +478,4 @@ function App() {
 }
 
 export default App;
+
