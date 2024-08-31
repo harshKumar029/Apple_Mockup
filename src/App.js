@@ -10,7 +10,8 @@ import play from './Assets/img/play.svg';
 import onMic from './Assets/img/onMic.svg';
 import ofMic from './Assets/img/ofMic.svg';
 import assistant from './Assets/img/assistant.svg';
-import siri from './Assets/video/Sequence2.mp4';
+import siri from './Assets/video/Sequence2.gif';
+import siri1 from './Assets/video/Sequence2.mp4';
 import quickbuttonad from './Assets/video/button_feature_ad.mp4';
 import videoscrollad from './Assets/video/scrollingvideo_ad1.mp4';
 import cameraAd from './Assets/video/cameraAd.mp4';
@@ -22,6 +23,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Spline from '@splinetool/react-spline';
 import ImageScrubbing from './ImageScrubbing';
+import Loading from './Loading';
 
 function App() {
 
@@ -34,6 +36,7 @@ function App() {
   const [translateY, setTranslateY] = useState(0);
   const [opacity, setOpacity] = useState(1);
   const [showNextSection, setShowNextSection] = useState(false);
+  const [loading, setloading] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -157,6 +160,9 @@ function App() {
 
   return (
     <div>
+      {/* {loading ? (
+        <Loading /> 
+      ) : (<><p className=' bg-slate-100 text-red-700'>bcdhcsiuvc</p></>)} */}
 
       <nav className='bg-[#151515] w-[100%] z-[100] fixed top-0 opacity-[72%] flex items-center justify-around p-4'>
         <img className='h-5' src={logo} alt='logo' />
@@ -174,9 +180,9 @@ function App() {
           </button>
         </div>
       </nav>
-      {/* hero section */}
+
       <div className="h-[200vh] flex flex-col ">
-        {/* Sticky Section */}
+
         <div className="h-screen sticky top-0 flex items-center justify-center">
           <div ref={ref} className="max-w-[90%] m-auto grid grid-cols-3 h-[90vh] items-center justify-items-center">
             <h1
@@ -194,13 +200,14 @@ function App() {
                 textAlign: '-webkit-center',
               }}
             >
-              <video
+              {/* <video
                 className="w-[65%] "
-                src={siri}
+                src={siri1}
                 autoPlay
                 loop
                 muted
-              />
+              /> */}
+              <img className='w-[70%]' src={siri} alt='siri' />
             </div>
 
             <h1
@@ -471,7 +478,7 @@ function App() {
         </div>
       </div>
 
-
+      {/* )} */}
 
     </div>
   );
