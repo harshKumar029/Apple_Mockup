@@ -10,7 +10,7 @@ import play from './Assets/img/play.svg';
 import onMic from './Assets/img/onMic.svg';
 import ofMic from './Assets/img/ofMic.svg';
 import assistant from './Assets/img/assistant.svg';
-import sirivideo from './Assets/video/Sequence2.mp4';
+import siri from './Assets/video/Sequence2.mp4';
 import quickbuttonad from './Assets/video/button_feature_ad.mp4';
 import videoscrollad from './Assets/video/scrollingvideo_ad1.mp4';
 import cameraAd from './Assets/video/cameraAd.mp4';
@@ -196,7 +196,7 @@ function App() {
             >
               <video
                 className="w-[65%] "
-                src='https://www.w3schools.com/html/mov_bbb.mp4'
+                src={siri}
                 autoPlay
                 loop
                 muted
