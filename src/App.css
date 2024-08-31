@@ -5,3 +5,27 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  @media screen and (max-width: 1400px) {
+    html {
+      font-size: 75%;
+    }
+
+  }
+  
+  @media screen and (max-width: 1200px) {
+   .iphone{
+    display: none;
+   }
+   .errormsg{
+    display: block;
+   }
+  }
+  @media screen and (min-width: 1200px) {
+    .iphone{
+     display: block;
+    }
+    .errormsg{
+     display: none;
+    }
+   }
